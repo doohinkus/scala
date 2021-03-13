@@ -1,12 +1,20 @@
 package lectures.partOneBasics.LectureIIOOP
 
 object MethodNotation extends App{
-  class Person(val name:String, favoriteMovie:String){
+  class Person(val name:String, val favoriteMovie:String="", val age: Int = 0){
     def likes(movie:String):Boolean = movie == favoriteMovie
     def hangsWith(person: Person):String = s"${this.name} hangs with ${person.name}"
     def ^(person: Person): String = s"${this.name} and ${person.name } wear ^ hats because special characters can be methods in Scala!!!"
     def isAlive():String = s"Person is alive!"
     def apply(): String =s"Hey, my name is $name and I love $favoriteMovie."
+    def apply(n: Int): String = s"$name watched $favoriteMovie $n times"
+    def learns(thing: String) = s"$name is learning $thing"
+    def learnsScala = this learns "Scala"
+
+
+    def +(nickname:String):Person = new Person(s"$name ($nickname) ", favoriteMovie, age)
+
+    def unary_+ : Person = new Person(name, favoriteMovie, age + 1)
   }
   val mary = new Person("Mary", "Shining")
   println(mary.likes("Shining"))
@@ -36,8 +44,19 @@ object MethodNotation extends App{
   println(mary.isAlive)
 
 
-  // apply
+  // apply, lets you call your object like a function
   println(mary.apply)
   println(jim())
+
+  //
+  println((mary + "jack flash")())
+  println((+mary).age)
+
+  println(jim learnsScala)
+  println(tom learns "electronics")
+
+/// applies
+  println(tom())
+  println(tom(5))
 
 }
